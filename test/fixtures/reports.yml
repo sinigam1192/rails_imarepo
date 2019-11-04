@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  status: 1
+  date: 2019-10-27
+  in_time: 2019-10-27 23:04:42
+  out_time: 2019-10-27 23:04:42
+  adress: 
+  latitude: 1.5
+  longitude: 1.5
+  content_start: MyText
+  cotnent_in: MyText
+  content_out: MyText
+  arrival_time: 2019-10-27 23:04:42
+  withdrawal_time: 2019-10-27 23:04:42
+  from_user: 1
+  to_user: 1
+  items: MyString
+
+two:
+  name: MyString
+  status: 1
+  date: 2019-10-27
+  in_time: 2019-10-27 23:04:42
+  out_time: 2019-10-27 23:04:42
+  adress: 
+  latitude: 1.5
+  longitude: 1.5
+  content_start: MyText
+  cotnent_in: MyText
+  content_out: MyText
+  arrival_time: 2019-10-27 23:04:42
+  withdrawal_time: 2019-10-27 23:04:42
+  from_user: 1
+  to_user: 1
+  items: MyString

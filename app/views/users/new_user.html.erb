@@ -1,1 +1,15 @@
 <h1>新規ユーザー登録</h1>
+<%= form_tag("/users/create") do %>
+ユーザー名
+<p><input name = "name" ></p>
+メールアドレス
+<p><input name = "mail" ></p>
+パスワード
+<p><input name = "password" type = "password"></p>
+※再度パスワードを入力していください。
+<p><input name = "check_password" type = "password"></p>
+
+※所属企業IDを入力してください。
+<p><input name = "company_id" ></p>
+<input type = "submit" value ="新規作成">
+<%end%>

@@ -1,1 +1,29 @@
 <h1>レポート管理画面</h1>
+【<%= @report.name %>】の詳細情報
+<p>日にち：<%= @report.date %></p>
+<p>時  間：<%= @report.in_time %> ~ <%= @report.out_time %></p>
+<p>住　所：<%= @report.adress %></p>
+<p>備　考：<%= @report.content_start %></p>
+<p>持ち物：</p>
+
+<%= form_tag("/work/report/#{@report.id}/advance") do %>
+  <% @items.each do |item|%>
+  <p><input type = "checkbox"><%=item%></p>
+  <%end%>
+  <% if @report.status > 0 && @report.status < 3 %>
+  ・特記事項
+  <input type = "textbox" name = "<%@content%>">
+  <%end%>
+  <%if @report.status < 3 %>
+  <input type = "submit" value = "<%= @value %>" >
+  <%end%>
+<%end%>
+
+<%= form_tag("/work/report/#{@report.id}/retreat") do %>
+<%if @report.status > 0 && @report.status < 3 %>
+<input type = "submit" value = "一つ戻る" >
+<%elsif @report.status > 2%>
+  <p>お疲れさまでした！</p>
+  直帰か帰社するかラジオボタンとかで選択させて未記入ならrender
+  <%end%>
+<%end%>

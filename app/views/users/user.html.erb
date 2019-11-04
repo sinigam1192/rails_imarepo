@@ -1,1 +1,11 @@
 <h1>ユーザー管理画面</h1>
+<h2><%=@user.name%>さんのページです</h2>
+<% if @current_user.id == @user.id %>
+<%= link_to "レポートを作成する", "/work/report/new" %>
+<% end %>
+
+<h2>依頼実績</h2>
+<% @user.reports.each do |report| %>
+<p><%= link_to "#{report.name}", "/work/report/#{report.id}" %>
+進捗度: <%= report.status %> </p>
+<%end%>

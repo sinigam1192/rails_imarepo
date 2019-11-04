@@ -1,13 +1,16 @@
 <div name = "login-page">
   <h1>imarepo</h1>
   <h2>ログインページ</h2>
+
   <div class = "login">
-    <div　name ="login-form">
+    <div name ="login-form">
+      <%= form_tag("/login") do %>
       <p>メールアドレス</p>
-      <input name = "email">
+      <input name = "mail">
       <p>パスワード</p>
       <input name = "password" type = "password">
-      <input id = "submit_ button" type = "submit" value ="ログイン">
+      <input type = "submit" value ="ログイン">
+      <%end%>
     </div>
   </div>
 </div>
