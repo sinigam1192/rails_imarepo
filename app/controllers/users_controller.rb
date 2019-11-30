@@ -19,6 +19,19 @@ class UsersController < ApplicationController
     end
   end
 
+ def edit
+   @user = User.find_by(id: params[:id])
+ end
+
+ def update
+   @user = User.find_by(id: params[:id])
+   @user.name = params[:name]
+   @user.mail = params[:mail]
+   @user.save
+   redirect_to("/users/#{@user.id}")
+ end
+
+
   def login
     @user = User.find_by(mail: params[:mail])
     if @user #&& @user.authenticate(params[:password])
@@ -35,6 +48,7 @@ class UsersController < ApplicationController
   end
 
   def mylist
+    @user = User.find_by(id: session[:user_id])
   end
 
   def new_user

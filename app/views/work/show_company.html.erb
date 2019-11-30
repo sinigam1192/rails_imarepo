@@ -1,1 +1,11 @@
-<h1>グループ管理画面</h1>
+<h1>【<%=@work.name%>】グループ管理画面</h1>
+ユーザー一覧
+<%@work.users_list.each do |user| %>
+<p><%= link_to "#{user.name}", "/users/#{user.id}" %></p>
+<% end %>
+
+レポート一覧
+<%@reports_id.each do |report|%>
+<%show = Report.find_by(id: report)%>
+<p><%= link_to "#{show.name}", "/work/report/#{show.id}" %></p>
+  <% end %>

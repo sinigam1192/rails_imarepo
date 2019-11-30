@@ -1,0 +1,18 @@
+<h1><%= @report.name %>の編集画面</h1>
+<%= form_tag("/work/report/#{@report.id}/update") do %>
+・レポート名
+<p><input name ="name" value = "<%=@report.name%>"></p>
+・誰に送信する？
+<p><input name = "to_user" value ="<%=@report.to_user%>"></p>
+・いつ？
+日時：<p><input name = "date" value ="<%=@report.date%>"></p>
+時間：<p><input name = "in_time" value ="<%=@report.in_time%>">~<input name = "out_time" value ="<%=@report.out_time%>"></p>
+・どこへ？
+<p><input name = "adress" value ="<%=@report.adress%>"></p>
+・持ち物※「,」で区切ってね！
+<p>入力に応じて持ち物記入欄を自動生成or持ち物欄を隠して必要に応じて表示</p>
+<p><input name = "items" value ="<%=@report.items%>"></p>
+・自由記入欄
+<p><input name ="content_start" value ="<%=@report.content_start%>"></p>
+<input name = "submit" type = "submit" value = "更新！">
+<% end %>

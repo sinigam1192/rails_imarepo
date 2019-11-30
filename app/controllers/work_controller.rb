@@ -5,37 +5,66 @@ class WorkController < ApplicationController
 
   def create_company
     @work = Work.new(
-      #記載してね！
+      users_id: @current_user.id
     )
+  end
+
+  def show_company
+    @work = Work.find_by(id: params[:id])
+    @reports_id = @work.report_id.split(",")
   end
 
   def new_report
     @report = Report.new
   end
 
+  def edit
+    @report = Report.find_by(id: params[:id])
+  end
+
+  def update
+    @report = Report.find_by(id: params[:id])
+    @report.name = params[:name]
+    @report.to_user = params[:to_user]
+    @report.adress = params[:adress]
+    @report.date = params[:date]
+    @report.in_time = params[:in_time]
+    @report.out_time = params[:out_time]
+    @report.items = params[:items]
+    @report.content_start = params[:content_start]
+    @report.save
+    redirect_to("/work/report/#{@report.id}")
+  end
+
   def report
     @report = Report.find_by(id:params[:id])
     @items = @report.items.split(",")
     @status = @report.status
+    @in_time = @report.in_time.strftime("%H:%M")
+    @out_time = @report.out_time.strftime("%H:%M")
     if @status == 0
       @value = "確認報告する"
     elsif @status == 1
       @value = "到着報告する"
-      @content = "content_start"
     elsif @status == 2
       @value = "退場報告する"
-      @content = "content_out"
     end
   end
 
-  def show_company
-    @work = Work.find_by(id: params[:id])
 
-  end
 
   def status_advance
     @report = Report.find_by(id: params[:id])
-    @report.status = @report.status + 1
+        @report.status = @report.status + 1
+    if @report.status == 2
+      @report.cotnent_in = params[:cotnent_in]
+      @report.latitude = params[:lat]
+      @report.longitude = params[:lng]
+      @report.arrival_time = Time.now
+    elsif @report.status == 3
+      @report.content_out = params[:content_out]
+      @report.withdrawal_time = Time.now
+    end
     @report.save
     redirect_to("/work/report/#{@report.id}")
   end
@@ -66,9 +95,5 @@ class WorkController < ApplicationController
       render("work/report/new")
     end
   end
-
-  def create_company
-  end
-
 
 end

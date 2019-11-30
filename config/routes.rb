@@ -3,16 +3,21 @@ Rails.application.routes.draw do
 #usersコントローラ
   post "/login" => "users#login"
   post "/users/create" => "users#create"
+  post "/users/:id/update" => "users#update"
   get "/users/:id/company" => "users#company"
   get "/login" => "users#login_form"
   get "/users/:id/mylist" => "users#mylist"
+  get "/users/:id/edit" => "users#edit"
   get "/new" => "users#new_user"
   get "/users/:id" => "users#user"
+
 
 
 #workコントローラ
   post "work/report/:id/advance" => "work#status_advance"
   post "work/report/:id/retreat" => "work#status_retreat"
+  post "work/report/:id/update" => "work#update"  
+  get "work/report/:id/edit" => "work#edit"
   get "work/report/new" => "work#new_report"
   get "work/company/new" => "work#new_company"
   get "work/report/:id" => "work#report"

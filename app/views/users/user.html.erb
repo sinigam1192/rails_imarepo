@@ -1,11 +1,11 @@
 <h1>ユーザー管理画面</h1>
-<h2><%=@user.name%>さんのページです</h2>
+<h2><%=@user.name%>さんのページです  <%= link_to("ユーザー編集", "/users/#{@user.id}/edit") %></h2>
 <% if @current_user.id == @user.id %>
-<%= link_to "レポートを作成する", "/work/report/new" %>
+<p><%= link_to "レポートを作成する", "/work/report/new" %></p>
+<p><%= link_to "マイリスト", "/users/1/mylist" %></p>
 <% end %>
-
 <h2>依頼実績</h2>
-<% @user.reports.each do |report| %>
-<p><%= link_to "#{report.name}", "/work/report/#{report.id}" %>
-進捗度: <%= report.status %> </p>
+<% @user.to_reports.each do |report| %>
+<p>・<%= link_to "#{report.name}", "/work/report/#{report.id}" %>
+進捗度: <%= report.ex_status %> </p>
 <%end%>

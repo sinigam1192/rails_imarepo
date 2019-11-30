@@ -1,1 +1,22 @@
 <h1>マイリスト</h1>
+<h2>管理レポート</h2>
+<% @user.from_reports.each do |report| %>
+<p>・<%= link_to "#{report.name}", "/work/report/#{report.id}" %>
+進捗度: <%= report.ex_status %> </p>
+<% end %>
+
+<h2>依頼実績</h2>
+<% @user.to_reports.each do |report| %>
+<p>・<%= link_to "#{report.name}", "/work/report/#{report.id}"%>
+進捗度: <%= report.ex_status %>
+  <% if report.status == 2 %>
+到着時刻：<%=report.push_time_now%>
+<%=report.content_start%>
+<% elsif report.status == 3 %>
+退場時刻：<%= report.push_time_now%>
+<%=report.content_out%>
+<%else%>
+依頼なし
+  <% end %>
+</p>
+<% end %>
