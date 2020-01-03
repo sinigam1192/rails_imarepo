@@ -14,9 +14,11 @@ Rails.application.routes.draw do
 
 
 #workコントローラ
+  get "work/:id/getgeolocation" => "work#getgeolocation"
   post "work/report/:id/advance" => "work#status_advance"
   post "work/report/:id/retreat" => "work#status_retreat"
-  post "work/report/:id/update" => "work#update"  
+  post "work/report/:id/update" => "work#update"
+
   get "work/report/:id/edit" => "work#edit"
   get "work/report/new" => "work#new_report"
   get "work/company/new" => "work#new_company"
@@ -24,4 +26,5 @@ Rails.application.routes.draw do
   get "work/company/:id" => "work#show_company"
   post "work/report/create" => "work#create_report"
   post "work/company/create" => "work#create_company"
+
   end

@@ -1,5 +1,5 @@
 <h1>ユーザー管理画面</h1>
-<h2><%=@user.name%>さんのページです  <%= link_to("ユーザー編集", "/users/#{@user.id}/edit") %></h2>
+<h2><%= link_to("#{@user.name}", "/users/#{@user.id}/edit") %>さんのページです</h2>
 <% if @current_user.id == @user.id %>
 <p><%= link_to "レポートを作成する", "/work/report/new" %></p>
 <p><%= link_to "マイリスト", "/users/1/mylist" %></p>

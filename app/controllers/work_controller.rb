@@ -1,4 +1,21 @@
 class WorkController < ApplicationController
+
+
+  def getgeolocation
+    @report = Report.find_by(id: params[:id])
+      @lat = params[:lat]
+      @lng = params[:lng]
+      if @lat
+        puts @report.id
+        puts @lat
+        puts @lng
+      else
+        puts "なし"
+      end
+    puts "じおげっと"
+    render nothing: true
+  end
+
   def new_company
     @work = Work.new
   end
@@ -16,11 +33,19 @@ class WorkController < ApplicationController
 
   def new_report
     @report = Report.new
+    users = @current_user.company_users
+    @users_for_options = Hash.new
+    users.each do |user|
+      @users_for_options.store(user.name, user.id)
+    end
+
   end
 
   def edit
     @report = Report.find_by(id: params[:id])
   end
+
+
 
   def update
     @report = Report.find_by(id: params[:id])
@@ -52,14 +77,13 @@ class WorkController < ApplicationController
   end
 
 
-
   def status_advance
     @report = Report.find_by(id: params[:id])
         @report.status = @report.status + 1
     if @report.status == 2
       @report.cotnent_in = params[:cotnent_in]
-      @report.latitude = params[:lat]
-      @report.longitude = params[:lng]
+
+
       @report.arrival_time = Time.now
     elsif @report.status == 3
       @report.content_out = params[:content_out]

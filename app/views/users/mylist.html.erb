@@ -18,5 +18,10 @@
 <%else%>
 依頼なし
   <% end %>
+  <%end%>
+
 </p>
-<% end %>
+<p>同一メンバー</p>
+<%@user.company_users.each do |user|%>
+<p><%=link_to "#{user.name}","/users/#{user.id}"%></p>
+<%end%>

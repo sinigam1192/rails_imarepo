@@ -27,7 +27,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '3.1.13'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+# Use enter date calendar for Bootstrap4
+gem "bootstrap4-datetime-picker-rails"
+# Use usefull date and times for js
+gem 'momentjs-rails'
+# Use font-awesome
+gem "font-awesome-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

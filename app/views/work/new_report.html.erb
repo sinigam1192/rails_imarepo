@@ -5,10 +5,70 @@
     ・レポート名
   <p><input name ="name"></p>
     ・誰に送信する？
-  <p><input name = "to_user"></p>
-    ・いつ？
-  日時：<p><input name = "date"></p>
-  時間：<p><input name = "in_time">~<input name = "out_time"></p>
+  <p><%=select_tag :to_user, options_for_select(@users_for_options)%></p>
+・いつ？
+    日時：<div class="container" >
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                    <input name = "date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
+                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar" ></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker4').datetimepicker({
+                    format: 'L'
+                });
+            });
+        </script>
+    </div>
+</div>
+<div class="container">
+    <div class='col-md-5'>
+        <div class="form-group">
+           <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                <input name = "in_time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+                <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+           <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+                <input name = "out_time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+                <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker7').datetimepicker({
+            viewMode: 'times',
+        });
+        $('#datetimepicker8').datetimepicker({
+            useCurrent: false,
+            viewMode: 'times',
+
+        });
+        $("#datetimepicker7").on("change.datetimepicker", function (e) {
+            $('#datetimepicker8').datetimepicker('minDate', e.date);
+
+        });
+        $("#datetimepicker8").on("change.datetimepicker", function (e) {
+            $('#datetimepicker7').datetimepicker('maxDate', e.date);
+        });
+    });
+</script>
   ・どこへ？
   <p><input name = "adress"></p>
   ・持ち物※「,」で区切ってね！
@@ -18,5 +78,6 @@
   <p><input name ="content_start"></p>
   <input name = "submit" type = "submit" value = "作成！">
   <% end %>
+
   </div>
 </div>

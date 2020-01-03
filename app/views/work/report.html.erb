@@ -1,5 +1,7 @@
 <h1>レポート管理画面</h1>
+
 【<%= @report.name %>】の詳細情報
+
 <p>日にち：<%= @report.date %></p>
 <p>時  間：<%= @report.in_time.strftime("%H:%M") %> ~ <%= @report.out_time.strftime("%H:%M") %></p>
 <p>住　所：<%= @report.adress %></p>
@@ -19,18 +21,16 @@
   ・特記事項記入欄
   <!--確認済み-->
   <%elsif @report.status == 1 %>
-  <input type = "submit" value = "<%= @value %>">
+  <div id ="submit_geoget">
+  <input type = "submit" value = "<%= @value %>" >
+  </div>
   <input type ="textbox" name = "cotnent_in" value = "<%= @report.cotnent_in %>">
-  <script>
-    geoget();
-    </script>
+
 <!--到着報告済み-->
   <%elsif @report.status == 2 %>
   <input type = "submit" value = "<%= @value %>" >
   <input type ="textbox" name = "content_out" value = "<%= @report.content_out %>">
-  <!--現在座標を取得する-->
-
-  <!--退場報告済み-->
+<!--退場報告済み-->
   <%elsif @report.status == 3 %>
   <%end%>
 <%end%>
@@ -44,7 +44,17 @@
     <%end%>
   <%end%>
 
-<button onclick="test()">取得!!!</button>
+
+
+  <!--ajaxてすと-->
+  <%= button_tag type: 'button', :id => 'getgeolocation', data: {id:@report.id} do %>
+  <%= '位置報告' %>
+  <% end %>
+<!--ajaxてすと終わり-->
+
+
+
+
   <%else%>
   <p>■現在状況<%= link_to "編集", "/work/report/#{@report.id}/edit"%></p>
   --------------------------------------------------------
@@ -53,9 +63,10 @@
   <p>到着コメント：<%=@report.cotnent_in%></p>
   <p>退場時間:<%=@report.withdrawal_time%></p>
   <p>退場コメント:<%=@report.content_out%></p>
+  <p><%= link_to "マイページ", "/users/#{@current_user.id}" %></p>
+
   --------------------------------------------------------
   <%end%>
-<%= link_to "マイページ", "/users/#{@current_user.id}" %>
 
 
 <div id ="output"></div>
@@ -63,9 +74,7 @@
 <p>テスト</p>
 緯度:<div id ="lat" name ="lat"></div>
 経度:<div id ="lng" name ="lng"></div>
-googlemapでみる
-rails
-DB保存値：
+<p>railsDB保存値</p>
 <p>緯度<%=@report.latitude%></p>
 <p>経度<%=@report.longitude%></p>
 <%= link_to "地図表示","https://www.google.co.jp/maps/search/#{@report.latitude},#{@report.longitude}" ,target: :_blank%>

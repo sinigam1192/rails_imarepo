@@ -17,13 +17,18 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require moment
+//= require moment/ja.js
+//= require tempusdominus-bootstrap-4.js
+
 
 function successPostion(position){
   var data = position.coords;
-  var lat = data.latitude;
-  var lng = data.longitude;
-  document.getElementById("lat").innerHTML = lat;
-  document.getElementById("lng").innerHTML = lng;
+   lat = data.latitude;
+   lng = data.longitude;
+  //document.getElementById("lat").innerHTML = lat;
+  //document.getElementById("lng").innerHTML = lng;
+
   }
 
   function errorPostion(position){
@@ -35,22 +40,52 @@ function successPostion(position){
   }
 
 
-function geoget(){
+function getgeolocation(){
   var message = "取得開始";
-  alert(message);
+  alert("geo1");
   console.log("js起動");
-if (navigator.geolocation) {
-alert("取得完了");
-  navigator.geolocation.getCurrentPosition(successPostion,errorPostion,geolocationSetting);
+  if (navigator.geolocation) {
+    alert("geo2");
+    navigator.geolocation.getCurrentPosition(successPostion,errorPostion,geolocationSetting);
+    return {lat, lng};
+
     }else{
       alert("端末未対応");
     }
-}
-
-function test(){
-  alert("テスト開始");
-  console.log("起動");
-  target = document.getElementById("output");
-  target.innerHTML ="成功！";
 
 }
+
+$(function geoget(){
+
+  $("#getgeolocation").click(function(){
+  var id = document.getElementById("id");
+  alert(id);
+    alert("１");
+    var position = getgeolocation();
+    alert(position.lat);
+    $.ajax({
+      url: "/work/:id/getgeolocation",
+      type: "GET",
+      datatype: "html",
+      data: {
+        lat: position.lat,
+        lng: position.lng,
+
+      },
+      timeout: 10,
+      //success: function(data){
+        //成功の処理
+        //alert("成功");
+
+        //alert(lat);
+      //},
+      //error: function(data){
+        //失敗の処理
+      //  alert("失敗");
+      //}
+
+    });
+
+    });
+  });
+//});

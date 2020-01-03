@@ -10,6 +10,47 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="header-logo">
+          あなたの今をレポートするImarepo!
+          </div>
+          <div class="image-logo">
+            <%= image_tag 'imarepo_logo.png', :size =>'100x25'%>
+            </div>
+
+        <ul class="header-menus">
+        <% if @current_user %>
+          <li>
+            <%= link_to("ユーザーページ", "/users/#{@current_user.id}") %>
+          </li>
+          <li>
+            <%= link_to("レポート作成", "/work/report/new") %>
+          </li>
+          <li>
+            <%= link_to("マイリスト", "/users/#{@current_user.id}/mylist") %>
+          </li>
+          <li>
+            <%= link_to("グループ", "/work/company/#{@current_user.company_id}") %>
+          </li>
+          <li>
+            <%= link_to("ログアウト", "/logout", {method: :post}) %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to("新規登録", "/new") %>
+          </li>
+          <li>
+            <%= link_to("ログイン", "/login") %>
+          </li>
+        <% end %>
+      </ul>
+
+    </header>
+<%= yield %>
+<footer>
+  <div class = "footer-copyright">
+    © 2019 singam
+    </div>
+  </footer>
   </body>
 </html>
