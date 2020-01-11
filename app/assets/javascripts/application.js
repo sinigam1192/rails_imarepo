@@ -21,7 +21,7 @@
 //= require moment/ja.js
 //= require tempusdominus-bootstrap-4.js
 
-
+/*
 function successPostion(position){
   var data = position.coords;
    lat = data.latitude;
@@ -89,3 +89,4 @@ $(function geoget(){
     });
   });
 //});
+*/
