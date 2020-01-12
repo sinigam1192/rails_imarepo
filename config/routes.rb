@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root "users#login"
+  root "users#login_form"
 #usersコントローラ
   post "/login" => "users#login"
   post "/users/create" => "users#create"
