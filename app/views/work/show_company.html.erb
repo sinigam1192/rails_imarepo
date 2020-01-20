@@ -1,11 +1,91 @@
 <h1>【<%=@work.name%>】グループ管理画面</h1>
-ユーザー一覧
-<%@work.users_list.each do |user| %>
-<p><%= link_to "#{user.name}", "/users/#{user.id}" %></p>
-<% end %>
 
-レポート一覧
-<%@reports_id.each do |report|%>
-<%show = Report.find_by(id: report)%>
-<p><%= link_to "#{show.name}", "/work/report/#{show.id}" %></p>
+  <input id="tab01" type="radio" name="tabinput" checked>
+  <input id="tab02" type="radio" name="tabinput">
+  <input id="tab03" type="radio" name="tabinput">
+
+  <ul class="tabnav">
+    <li><label class="tabnav01" for="tab01">レポート</label></li>
+    <li><label class="tabnav02" for="tab02">メンバー一覧</label></li>
+      </ul>
+
+  <div class="tabcontent">
+      <div id="tabcontent01">
+        <h2>プロジェクトレポート</h2>
+        <p><%= link_to "レポート新規作成", "/work/report/new" ,class:"btn btn-primary"%></p>
+        <table class="table table-hover" style ="table-layout:fixed;">
+          <thead>
+            <tr>
+            <th style="width:400px;">レポート名</th>
+            <th style="width:100px;">進捗度</th>
+            <th style="width:200px;">メンバー</th>
+            <th style="width:150px;">最終更新日時</th>
+            <th>備考</th>
+            </tr>
+          </thead>
+          <tbody>
+  <% @work.reports.each do |report| %>
+  <tr>
+  <td><%= link_to "#{report.name}", "/work/report/#{report.id}" %></td>
+    <% if report.status == 0 %>
+    <td class ="active">
+      <% elsif report.status == 1%>
+    <td class = "warning">
+      <% elsif report.status == 2%>
+    <td class ="success">
+      <% elsif report.status == 3%>
+      <td class = "info">
+      <% else %>
+      error
+      <% end %>
+      <%=report.ex_status%>
+      </td>
+      <td><%=report.to_user_name%></td>
+      <td><%=report.push_date_now%></td>
+      <td><%=report.content_start%></td>
+  </tr>
   <% end %>
+  </tbody>
+  </table>
+  </div>
+
+  <div id="tabcontent02">
+    <h2>メンバー</h2>
+    <table class="table table-hover" >
+      <thead>
+        <tr>
+          <th>メンバー名</th>
+        </tr>
+      </thead>
+        <tbody>
+              <% @work.users.each do |user| %>
+              <tr>
+                <td><%= link_to "#{user.name}","/users/#{user.id}"%></td>
+              </tr>
+              <%end%>
+        </tbody>
+      </table>
+  </div>
+  <div id="tabcontent03">
+    <h2>設定</h2>
+    <!--チェックボックスを設けてメンバーに加えるか設定できること-->
+    <table class="table table-hover" >
+      <thead>
+        <tr>
+          <th>メンバー名</th>
+          <th>参加</th>
+          <th>権限</th>
+        </tr>
+      </thead>
+        <tbody>
+              <% @all_users.each do |user| %>
+              <tr>
+                <td><%= link_to "#{user.name}","/users/#{user.id}"%></td>
+                <td><!--%=form.check_box %>--></td>
+                <td></td>
+              </tr>
+              <%end%>
+        </tbody>
+      </table>
+  </div>
+  </div>

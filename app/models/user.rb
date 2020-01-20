@@ -12,7 +12,17 @@ class User < ApplicationRecord
     return Report.where(to_user: self.id)
   end
 
-  def company_users
+  def company_user
     return User.where(company_id: self.company_id)
   end
+
+  def companys
+    return Work.where(company_id: self.company_id)
+  end
+
+  def free_reports
+    return reports = Report.where(from_user: self.id, company_id: nil)
+  end
+
+
 end

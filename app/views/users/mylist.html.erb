@@ -1,27 +1,86 @@
 <h1>マイリスト</h1>
-<h2>管理レポート</h2>
-<% @user.from_reports.each do |report| %>
-<p>・<%= link_to "#{report.name}", "/work/report/#{report.id}" %>
-進捗度: <%= report.ex_status %> </p>
+<input id="tab01" type="radio" name="tabinput" checked>
+<input id="tab02" type="radio" name="tabinput">
+<input id="tab03" type="radio" name="tabinput">
+
+<ul class="tabnav">
+  <li><label class="tabnav01" for="tab01">レポート</label></li>
+  <li><label class="tabnav02" for="tab02">プロジェクト</label></li>
+  <li><label class="tabnav03" for="tab03">メンバー一覧</label></li>
+</ul>
+
+<div class="tabcontent">
+    <div id="tabcontent01">
+      <h2>フリーレポート</h2>
+      <p><%= link_to "レポート新規作成", "/work/report/new" ,class:"btn btn-primary"%></p>
+      <table class="table table-hover" style ="table-layout:fixed;">
+        <thead>
+          <tr>
+          <th style="width:400px;">レポート名</th>
+          <th style="width:100px;">進捗度</th>
+          <th style="width:200px;">メンバー</th>
+          <th style="width:150px;">最終更新日時</th>
+          <th>備考</th>
+          </tr>
+        </thead>
+        <tbody>
+<% @user.free_reports.each do |report| %>
+<tr>
+<td><%= link_to "#{report.name}", "/work/report/#{report.id}" %></td>
+  <% if report.status == 0 %>
+  <td class ="active">
+    <% elsif report.status == 1%>
+  <td class = "warning">
+    <% elsif report.status == 2%>
+  <td class ="success">
+    <% elsif report.status == 3%>
+    <td class = "info">
+    <% else %>
+    error
+    <% end %>
+    <%=report.ex_status%>
+    </td>
+    <td><%=report.to_user_name%></td>
+    <td><%=report.push_date_now%></td>
+    <td><%=report.content_start%></td>
+</tr>
 <% end %>
-
-<h2>依頼実績</h2>
-<% @user.to_reports.each do |report| %>
-<p>・<%= link_to "#{report.name}", "/work/report/#{report.id}"%>
-進捗度: <%= report.ex_status %>
-  <% if report.status == 2 %>
-到着時刻：<%=report.push_time_now%>
-<%=report.content_start%>
-<% elsif report.status == 3 %>
-退場時刻：<%= report.push_time_now%>
-<%=report.content_out%>
-<%else%>
-依頼なし
-  <% end %>
-  <%end%>
-
-</p>
-<p>同一メンバー</p>
-<%@user.company_users.each do |user|%>
-<p><%=link_to "#{user.name}","/users/#{user.id}"%></p>
-<%end%>
+</tbody>
+</table>
+</div>
+<div id="tabcontent02">
+<h2>ワークリスト</h2>
+<p><%= link_to "プロジェクト新規作成", "/work/company/new" ,class:"btn btn-primary"%></p>
+<table class = "table">
+  <thead>
+    <tr>
+      <th>プロジェクト名</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @user.companys.each do |company| %>
+      <tr>
+        <td><%=link_to "#{company.name}", "/work/company/#{company.id}"%></td>
+      </tr>
+      <%end%>
+      </tbody>
+  </table>
+</div>
+<div id="tabcontent03">
+  <h2>メンバー</h2>
+  <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>メンバー名</th>
+      </tr>
+    </thead>
+      <tbody>
+            <% @user.company_user.each do |user| %>
+            <tr>
+              <td><%= link_to "#{user.name}","/users/#{user.id}"%></td>
+            </tr>
+            <%end%>
+      </tbody>
+    </table>
+</div>
+</div>

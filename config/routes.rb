@@ -13,8 +13,6 @@ Rails.application.routes.draw do
   get "/new" => "users#new_user"
   get "/users/:id" => "users#user"
 
-
-
 #workコントローラ
   get "work/:id/getgeolocation" => "work#getgeolocation"
   post "work/report/:id/advance" => "work#status_advance"

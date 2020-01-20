@@ -4,7 +4,6 @@
     <title>Imarepo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -28,9 +27,6 @@
           </li>
           <li>
             <%= link_to("マイリスト", "/users/#{@current_user.id}/mylist") %>
-          </li>
-          <li>
-            <%= link_to("グループ", "/work/company/#{@current_user.company_id}") %>
           </li>
           <li>
             <%= link_to("ログアウト", "/logout", {method: :post}) %>

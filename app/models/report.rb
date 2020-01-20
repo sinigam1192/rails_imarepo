@@ -18,6 +18,23 @@ class Report < ApplicationRecord
     elsif self.status == 3
       withdrawal_time = self.withdrawal_time.strftime("%H:%M")
       return withdrawal_time
-      end
+    end
+  end
+
+  def push_date_now
+    last_time = self.updated_at.strftime("%D %H:%M")
+    return last_time
+  end
+
+  def to_user_name
+    to_user = User.find_by(id: self.to_user)
+    return to_user.name
+  end
+
+
+  def company_list
+    user = User.find_by(id: session[:user_id])
+    company_list = Work.where(company_id: user.company_id)
+    return company.name
   end
 end

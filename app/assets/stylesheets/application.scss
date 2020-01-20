@@ -1,3 +1,4 @@
+//@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
 @import "tempusdominus-bootstrap-4.css";
@@ -52,6 +53,48 @@ footer{
   text-aligin: center;
 }
 
-.border-line{
+p.line{
+  border-bottom: 1px solid red;
+  padding-bottom: 15px; /* 内容と線との間隔量 */
+}
 
+/* tabnav */
+.tabnav{
+  margin: 0;
+    padding: 0;
+}
+.tabnav li{
+    display: inline;
+}
+.tabnav li label{
+    display: inline-block;
+    background: #405dca;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    text-decoration: none;
+  cursor: pointer;
+}
+input[name=tabinput]{
+  display: none;
+}
+#tab01:checked ~ .tabnav .tabnav01,
+#tab02:checked ~ .tabnav .tabnav02,
+#tab03:checked ~ .tabnav .tabnav03{
+    background: #ddd;
+    color: #333;
+}
+
+/* tabcontent */
+.tabcontent{
+    padding: 20px;
+    border: 1px dotted #ccc;
+}
+.tabcontent div{
+  display: none;
+}
+#tab01:checked ~ .tabcontent #tabcontent01,
+#tab02:checked ~ .tabcontent #tabcontent02,
+#tab03:checked ~ .tabcontent #tabcontent03 {
+  display: block;
 }

@@ -29,16 +29,16 @@ class WorkController < ApplicationController
   def show_company
     @work = Work.find_by(id: params[:id])
     @reports_id = @work.report_id.split(",")
+    @all_users = User.where(company_id: session[:user_id])
   end
 
   def new_report
     @report = Report.new
-    users = @current_user.company_users
+    users = @current_user.company_user
     @users_for_options = Hash.new
     users.each do |user|
       @users_for_options.store(user.name, user.id)
     end
-
   end
 
   def edit
